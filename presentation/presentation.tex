@@ -19,6 +19,11 @@
 \usepackage[textfont={scriptsize}]{caption}
 \usepackage{tikz} % for checkmarks
 
+\setbeamertemplate{footline}{\begin{tikzpicture}
+    \node [inner sep=0pt, anchor=east] (0,0) {\includegraphics[width=\paperwidth,height=0.7cm]{12_espa}};
+%    \node [inner sep=0pt, anchor=east] at (-2ex,-3ex) {\insertframenumber{} / %\inserttotalframenumber};
+\end{tikzpicture}}
+
 \title{Open tools and methodology for the development of a web-based transportation platform}
 %\author{Babalis B*, Ballis A., Koukoutsis E.}
 %\institute{National Technical University of Athens}
