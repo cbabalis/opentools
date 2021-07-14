@@ -4,8 +4,8 @@
 \usepackage[rightcaption]{sidecap}
 
 \usefonttheme[onlymath]{serif}
-%\definecolor{LHCblue}{RGB}{4, 114, 255}
-%\usecolortheme[named=LHCblue]{structure}
+\definecolor{LHCblue}{RGB} {180,199,231}%{4, 114, 255}
+\usecolortheme[named=LHCblue]{structure}
 \usepackage[bars]{beamerthemetree} % Beamer theme v 2.2
 \usepackage{multicol}
 \usepackage{lmodern}
@@ -18,11 +18,12 @@
 \setbeamertemplate{caption}[numbered] % number the figures
 \usepackage[textfont={scriptsize}]{caption}
 \usepackage{tikz} % for checkmarks
+\setbeamertemplate{blocks}[rounded][shadow=true]
 
-\setbeamertemplate{footline}{\begin{tikzpicture}
-    \node [inner sep=0pt, anchor=east] (0,0) {\includegraphics[width=\paperwidth,height=0.7cm]{12_espa}};
-%    \node [inner sep=0pt, anchor=east] at (-2ex,-3ex) {\insertframenumber{} / %\inserttotalframenumber};
-\end{tikzpicture}}
+%\setbeamertemplate{footline}{\begin{tikzpicture}
+%    \node [inner sep=0pt, anchor=east] (0,0) {\includegraphics[width=\paperwidth,height=0.8cm]{15_footnote_all}};
+%%    \node [inner sep=0pt, anchor=east] at (-2ex,-3ex) {\insertframenumber{} / %\inserttotalframenumber};
+%\end{tikzpicture}}
 
 \title{Open tools and methodology for the development of a web-based transportation platform}
 %\author{Babalis B*, Ballis A., Koukoutsis E.}
@@ -46,21 +47,40 @@
 \date[CES 2021] % (optional)
 {Circular Economy and Sustainability, July 2021}
 
-\logo{\includegraphics[height=1cm]{09_pyrforos_bw}}
+% conditional for logo. \placelogofalse removes both enirisst and pyrforos
+\newif\ifplacelogo % create a new conditional
+\placelogotrue % set it to true
+%\logo{\includegraphics[height=1cm]{09_pyrforos_bw}}
+\logo{\ifplacelogo
+  \includegraphics[width=1cm,height=1cm,keepaspectratio]{13_enirisst}%
+  \hspace{\dimexpr\paperwidth-2cm-5pt}%
+  \includegraphics[width=1cm,height=1cm,keepaspectratio]{09_pyrforos_bw}%
+\fi}
+\usepackage{textpos}
 
 \begin{document}
 
 \frame{\titlepage}
-
-\begin{frame}
-	\frametitle{Table of Contents}
-	\tableofcontents
-\end{frame}
+%
+%\begin{frame}
+%	\frametitle{Table of Contents}
+%	\tableofcontents
+%\end{frame}
 
 \section{Introduction}
+
+	\begin{frame}
+	\frametitle{Scope of the Presentation}
+	\begin{itemize}
+    	\item Describe a web-based transportation platform built with open data and tools.
+    	\item Present the platform from functionality and usability perspective.
+    \end{itemize}
+	
+	\end{frame}
+
     \begin{frame}
     \frametitle{Introduction}
-    A transportation platform aim to deliver the supply chain solutions required for excellence in transportation sourcing, execution and management.\\
+    \emph{Transportation platform:} Supports all activities relating to transport, logistics and the distribution of goods.\\
     Usually transportation platforms offer functionality based on:
     \begin{itemize}
     	\item Proprietary GIS systems.
@@ -72,30 +92,22 @@
     \end{frame}
     
     \begin{frame}
-    \frametitle{Alternative approach}
+    \frametitle{Alternative Approach: Open Data and Tools Platform}
+    Platform based on free and open source data and tools.
     
-    An alternative approach on building a web-based transportation platform is presented.
-    \begin{block}{Alternative Approach}
-    Platform based exclusively on free/open source data and tools.
-	\end{block}
-
+    \begin{itemize}
+        \item Open Data.
+        \item Open source tools for building the platform.
+        \item Open Maps.
+    \end{itemize}
     \pause
+    \begin{block}{Why open data andtools?}
     \begin{itemize}
-        \item Open Data
-        \item Open source tools for building the platform
-        \item Open Maps
+        \item \textbf{Sustainability/Maintainability:} no dependencies on proprietary tools.
+        \item \textbf{Reliability:} Maps data checked and maintained by the community.
     \end{itemize}
-    \end{frame}
+    \end{block}
     
-    \begin{frame}
-    \frametitle{Why open tools?}
-    Why a platform based on open tools?
-    
-    \begin{itemize}
-        \item Ensure sustainability of the system.
-        \item Maintained by the community - no dependencies on proprietary tools.
-        \item Data checked and maintained by community.
-    \end{itemize}
     \end{frame}
 
 \section{Architecture and Design}
@@ -116,16 +128,16 @@
     
     \begin{itemize}
         \item Maps collected and integrated to the platform.
-        \item Data collected from various sources.
+        \item Open Data collected.
         \item Data organized and integrated to the platform.
-        \item Data visualizations computed and offered (through charts/pies and maps).
+        \item Data visualizations offered (through charts/pies and maps).
         \item Extra functionalities developed combining the data collected with geospatial information.
     \end{itemize}
     
     \end{frame}
     
     \begin{frame}
-    \frametitle{Conceptual Architecture of the Platform}
+    \frametitle{High-level Architecture of the Platform}
     \begin{figure}[h]
     \centering
     \includegraphics[width=8cm, height=5cm]{10_conceptual-architecture}
@@ -154,7 +166,8 @@
     \frametitle{Platform Data}
     
     \begin{itemize}
-        \item Data has been collected from many, different sources (elstat, eurostat, et al)
+    	\item EN.I.R.I.S.S.T Service: “Transport \& Agrologistics” example.
+        \item Data has been collected from elstat.
         \item Data has been normalized and filters may be applied to create a custom configuration.
     \end{itemize}
     
@@ -204,11 +217,39 @@
     \end{frame}
     
     \begin{frame}
-    \frametitle{Applications on selected data}
-    By selecting a custom data sub-set the user may further use the platform for valuable insights.
+    \frametitle{Overview of platform basics}
+    \checkmark A platform for data manipulation.\\
+    \checkmark Integration of data of interest with geodata.\\
+    \checkmark Visualization of combined data to maps.
+    \pause
+    \begin{alertblock}{Added value?}
+    By selecting a custom data sub-set the user may further take advantage of the platform for valuable insights via a set of web-apps.
+    \end{alertblock}
+    \end{frame}
     
-    \begin{exampleblock}{Four Step Model app}
-	    The user may execute a four-step-model on the selected data and get the results.
+    \begin{frame}
+    \frametitle{Applications on selected data: Four Step Model Example}
+    With the selection of the dataset of interest the user may procceed to run a four step model on it.
+    \begin{itemize}
+    	\item The user may select the dataset of choice for the four step model execution.
+    	\item The user may customize the four step model by selecting a friction function.
+    \end{itemize}
+    
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=8cm, height=2cm]{12_4sm_filters}
+    \caption{Selection of custom dataset and friction function for the Four Step Model Execution.}
+    \label{fig:4sm_filters}
+    \end{figure}
+    
+    \end{frame}
+    
+    \begin{frame}
+    
+    \begin{exampleblock}{Four Step Model app execution}
+    \frametitle{Applications on selected data: Four Step Model Example}
+	    \checkmark Custom data set that used as input is presented.\\
+	    \checkmark Origin-Destination Matrix with highlighted values is presented.
 	\end{exampleblock}
 	
 	\begin{figure}[h]
@@ -220,14 +261,15 @@
     
     \end{frame}
 
-\section{Results}
+\section{Conclusions}
 
 	\begin{frame}
     \frametitle{Conclusions - Added value}
     Platform created as Proof of Concept.
     \begin{itemize}
         \item A web-based transportation platform can be built solely on open tools and data.
-        \item Such a platform offers functionality and apps restricted only by its community.
+        \item Such a platform is able to host applications and to implement functionality according to user requirements.
+        \item A platform based on open data and tools is able to offer high-level solutions and customization.
         \item No proprietary software ensures sustainability of such a project.
     \end{itemize}
     
@@ -237,11 +279,21 @@
     \frametitle{Restrictions - Future Work}
     \begin{itemize}
         \item Such a platform is heavily-bound to its users and the community.
-        \item It can develop only so much as its users are interested to.
         \item Challenge: Platform integration to open geodata ecosystem.
     \end{itemize}
     
     \end{frame}
-
+    
+    {
+    \setbeamertemplate{footline}{\begin{tikzpicture}
+    \node [inner sep=0pt, anchor=east] (0,0) {\includegraphics[width=\paperwidth,height=0.8cm]{15_footnote_all}};
+%    \node [inner sep=0pt, anchor=east] at (-2ex,-3ex) {\insertframenumber{} / %\inserttotalframenumber};
+\end{tikzpicture}}
+\placelogofalse
+    \begin{frame}
+    \frametitle{Thank you!}
+    Thank you for your attention
+    \end{frame}
+}
 	
 \end{document}

@@ -1,4 +1,4 @@
-\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
-\beamer@sectionintoc {2}{Architecture and Design}{8}{0}{2}
-\beamer@sectionintoc {3}{Methodology}{11}{0}{3}
-\beamer@sectionintoc {4}{Results}{15}{0}{4}
+\beamer@sectionintoc {1}{Introduction}{2}{0}{1}
+\beamer@sectionintoc {2}{Architecture and Design}{7}{0}{2}
+\beamer@sectionintoc {3}{Methodology}{10}{0}{3}
+\beamer@sectionintoc {4}{Conclusions}{17}{0}{4}
